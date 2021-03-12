@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap" rel="stylesheet">
+  <title>Fitness</title>
+</head>
+<style>
+  body {
+    font-family: 'Xanh Mono', monospace;
+    background: url('gym.png ');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+  }
+
+  .left {
+    position: absolute;
+    left: 48px;
+    top: 18px;
+    display: inline-block;
+
+  }
+
+  .left img,.color img {
+    width: 48px;
+    filter: invert(100%);
+    display: block;
+    margin: auto;
+    /* margin-right: auto; */
+  }
+   
+
+  .mid {
+
+    display: block;
+    /* to fix position with auto display should block ,set width */
+    width: 40%;
+    margin: 18px auto;
+  }
+
+  .right {
+    position: absolute;
+    right: 34px;
+    top: 18px;
+
+    display: inline-block;
+    /* margin-top: 4px; */
+  }
+
+  .navbar {
+    display: inline-block;
+  }
+
+  .navbar li {
+    list-style: none;
+    display: inline-block;
+    margin: 0px;
+  }
+
+  .left div {
+    text-align: center;
+    margin-top: 6px;
+    font-size: 13px;
+  }
+
+  .navbar li a {
+    color: white;
+    text-decoration: none;
+    margin: 15px;
+  }
+
+  .navbar li a.active,
+  .navbar li a:hover {
+    text-decoration: underline;
+    color: rgb(186, 190, 189);
+  }
+
+  .btn {
+    font-family: 'Xanh Mono', monospace;
+    margin: 0px 5px;
+    background-color: black;
+    color: white;
+    padding: 3px 15px;
+    border: 2px solid gray;
+    border-radius: 8px;
+    cursor: pointer;
+
+  }
+
+  .btn:hover {
+    color: rgb(122, 119, 119);
+
+  }
+  .container{
+    position: relative;
+    /* border: 2px solid white; */
+    margin: 11px 397px;
+    padding: 30px;
+    width:33%;
+    /* border-radius: 30px; */
+    background-color: rgb(149, 208, 226);
+    z-index: 12;
+  /* visibility: hidden; */
+  }
+  .container h2{
+    text-align: center;
+  }
+  .container .formgroup{
+margin:auto;
+  }
+  .formgroup input{  font-family: 'Xanh Mono', monospace;
+  display: block;
+    padding: 2px;
+    margin: 4px auto;
+    font-size: 13px;
+    text-align: center;
+    width: 67%;
+    border-radius: 8px;
+    border: 2px solid black;
+
+  }
+  .container button{
+    margin: 4px auto;
+    display: block;
+    width:69%;
+  }
+  .color{
+    position: relative;
+    z-index: -2;
+    border: 1px solid rgb(228, 93, 93);
+    width: 9%;
+    margin: -219px 0px 0px 867px;
+    background-color: rgb(228, 93, 93);
+    height: 178px;
+  }
+  .color div
+  {
+    text-align: center;
+    font-size: 8px;
+  }
+  .color img{
+    margin-top: 66px;
+    width: 34px;
+
+  }
+</style>
+
+<body>
+  <header class="head">
+    <div class="left">
+      <img src="logo.png">
+      <div>champ fitness</div>
+    </div>
+    <div class="mid">
+      <ul class="navbar">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">facilities</a></li>
+        <li><a href="#">fitness calculator</a></li>
+        <li><a href="#">about us</a></li>
+      </ul>
+    </div>
+    <div class="right">
+      <button class="btn">Call us</button><button class="btn">Email Us</button>
+    </div>
+  </header>
+  <div class="container">
+    <h2>Join now </h2>
+    <form action="noAction.php">
+      <div class="formgroup">
+        <input type="text" name="" placeholder="Enter your name">
+        <input type="text" name="" placeholder="Enter your name">
+        <input type="text" name="" placeholder="Enter your name">
+       </div>
+    </form>
+    <button class="btn">Submit</button>
+  </div>
+  <div class="color">
+    
+    <img src="logo.png">
+     <div> champ fitness</div>
+  </div>
+
+</body>
+
+</html>
