@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Credit Control Vector Design</title>
+  <style>
+    svg {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <!-- Credit Control Icon -->
+    <circle cx="100" cy="100" r="80" fill="#F2C94C" />
+    <path d="M100 30L100 130L30 80L170 80L100 30" fill="#FFF" />
+
+    <!-- Text -->
+    <text x="50" y="160" font-size="18" fill="#000">Credit Control</text>
+  </svg>
+</body>
+</html>
