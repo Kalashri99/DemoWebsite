@@ -1,9 +1,71 @@
 
+<!DOCTYPE html>
 
+<html lang="en">
 
+<head>
 
+  <meta charset="UTF-8">
 
-  
-      
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
+  <style>
+
+    .score-image {
+
+      width: 200px;
+
+      height: 200px;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div>
+
+    <img id="scoreImage" class="score-image" src="" alt="Score Image">
+
+  </div>
+
+  <script>
+
+    function displayScoreImage(score) {
+
+      var scoreImage = document.getElementById("scoreImage");
+
+      if (score >= 90) {
+
+        scoreImage.src = "excellent.jpg";
+
+      } else if (score >= 70) {
+
+        scoreImage.src = "good.jpg";
+
+      } else if (score >= 50) {
+
+        scoreImage.src = "fair.jpg";
+
+      } else {
+
+        scoreImage.src = "poor.jpg";
+
+      }
+
+    }
+
+    // Example usage:
+
+    var score = 80; // Replace with the actual score value
+
+    displayScoreImage(score);
+
+  </script>
+
+</body>
+
+</html>
+
