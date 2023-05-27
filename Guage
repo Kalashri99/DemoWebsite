@@ -1,49 +1,101 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Gauge with Two Semicircles</title>
+  <style>
+    #gauge {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
 
-.color-fair {
-  background-color: #ffff00;
-}
+    .semicircle {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 50%;
+      overflow: hidden;
+    }
 
-.color-low {
-  background-color: #ff0000;
-}
+    .semicircle-top {
+      clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+    }
 
-.needle {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background-color: #000;
-  transform-origin: bottom;
-  transform: translateX(-50%) rotate(0deg);
-  transition: transform 0.5s ease;
-}
+    .semicircle-bottom {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
 
-function setCreditScore(score) {
-  var angle = (score / 100) * 180 - 90; // Calculate the angle based on the score
+    .color {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .color-good {
+      background-color: #00ff00;
+    }
+
+    .color-fair {
+      background-color: #ffff00;
+    }
+
+    .color-low {
+      background-color: #ff0000;
+    }
+
+    .needle {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background-color: #000;
+      transform-origin: bottom;
+      transform: translateX(-50%) rotate(0deg);
+      transition: transform 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="gauge">
+    <div class="semicircle semicircle-top">
+      <div class="color color-low"></div>
+      <div class="color color-fair"></div>
+      <div class="color color-good"></div>
+    </div>
+    <div class="semicircle semicircle-bottom">
+      <div class="needle"></div>
+    </div>
+  </div>
+
+  <script>
+    function setCreditScore(score) {
+      var angle = (score / 100) * 180 - 90; // Calculate the angle based on the score
+
+      var needle = document.querySelector(".needle");
+      needle.style.transform = "translateX(-50%) rotate(" + angle + "deg)";
+
+      var colors = document.querySelectorAll(".color");
+      for (var i = 0; i < colors.length; i++) {
+        colors[i].classList.remove("active");
+      }
+
+      if (score >= 70) {
+        colors[0].classList.add("active");
+      } else if (score >= 40) {
+        colors[1].classList.add("active");
+      } else {
+        colors[2].classList.add("active");
+      }
+    }
+
+    // Example usage
+    setCreditScore(85); // Sets the credit score to 85 (good)
+  </script>
+</body>
+</html>
+
+
   
-  var needle = document.querySelector(".needle");
-  needle.style.transform = "translateX(-50%) rotate(" + angle + "deg)";
-  
-  var colors = document.querySelectorAll(".color");
-  for (var i = 0; i < colors.length; i++) {
-    colors[i].classList.remove("active");
-  }
-  
-  if (score >= 70) {
-    colors[0].classList.add("active");
-  } else if (score >= 40) {
-    colors[1].classList.add("active");
-  } else {
-    colors[2].classList.add("active");
-  }
-}
-
-// Example usage
-setCreditScore(85); // Sets the credit score to 85 (good)
-
-
-
-
- 
