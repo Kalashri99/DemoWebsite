@@ -124,3 +124,68 @@ function toggleCaretSymbol(columnIndex, sortOrder) {
 </body>
 </html>
 
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+      cursor: pointer;
+    }
+    .sort-header::after {
+      content: "";
+      position: absolute;
+      right: 0.5rem;
+    }
+    .asc::after {
+      content: " \25B2"; /* caret up symbol */
+    }
+    .desc::after {
+      content: " \25BC"; /* caret down symbol */
+    }
+  </style>
+</head>
+<body>
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th class="sort-header" onclick="sortTable(0)" data-text="Name">Name</th>
+        <th class="sort-header" onclick="sortTable(1)" data-text="Age">Age</th>
+        <th class="sort-header" onclick="sortTable(2)" data-text="City">City</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>25</td>
+        <td>New York</td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>30</td>
+        <td>London</td>
+      </tr>
+      <tr>
+        <td>Mark Johnson</td>
+        <td>28</td>
+        <td>Paris</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // JavaScript code here (sortTable function)
+  </script>
+</body>
+</html>
+
+
