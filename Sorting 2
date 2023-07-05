@@ -1,10 +1,10 @@
-function sortTable(n) {
+mifunction sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("myTable");
   switching = true;
   //Set the sorting direction to ascending:
   dir = "asc"; 
-  /*Make a loop that will continue until
+  /*Make a loop that will con until
   no switching has been done:*/
   while (switching) {
     //start by saying: no switching is done:
@@ -52,3 +52,34 @@ function sortTable(n) {
     }
   }
 }
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+</head>
+<body>
+  <table id="myTable" style="border: 1px solid black;">
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>Jane Smith</td>
+      <td>30</td>
+    </tr>
+  </table>
+
+  <button id="copyButton" data-clipboard-target="#myTable">Copy</button>
+
+  <script>
+    var clipboard = new ClipboardJS('#copyButton');
+  </script>
+</body>
+</html>
+
