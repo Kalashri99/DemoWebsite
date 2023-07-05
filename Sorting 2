@@ -83,3 +83,47 @@ mifunction sortTable(n) {
 </body>
 </html>
 
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="path/to/clipboard-polyfill.js"></script>
+</head>
+<body>
+  <table id="myTable">
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>Jane Smith</td>
+      <td>30</td>
+    </tr>
+  </table>
+
+  <button id="copyButton">Copy</button>
+
+  <script>
+    var copyButton = document.getElementById('copyButton');
+    var table = document.getElementById('myTable');
+
+    copyButton.addEventListener('click', function() {
+      var range = document.createRange();
+      range.selectNode(table);
+      window.getSelection().addRange(range);
+
+      try {
+        document.execCommand('copy');
+        console.log('Table copied to clipboard!');
+      } catch (err) {
+        console.error('Unable to copy table:', err);
+      }
+
+      window.getSelection().removeAllRanges();
+    });
+  </script>
+</body>
+</html>
