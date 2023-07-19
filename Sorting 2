@@ -1,0 +1,129 @@
+mifunction sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will con until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+</head>
+<body>
+  <table id="myTable" style="border: 1px solid black;">
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>Jane Smith</td>
+      <td>30</td>
+    </tr>
+  </table>
+
+  <button id="copyButton" data-clipboard-target="#myTable">Copy</button>
+
+  <script>
+    var clipboard = new ClipboardJS('#copyButton');
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="path/to/clipboard-polyfill.js"></script>
+</head>
+<body>
+  <table id="myTable">
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <td>John Doe</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>Jane Smith</td>
+      <td>30</td>
+    </tr>
+  </table>
+
+  <button id="copyButton">Copy</button>
+
+  <script>
+    var copyButton = document.getElementById('copyButton');
+    var table = document.getElementById('myTable');
+
+    copyButton.addEventListener('click', function() {
+      var range = document.createRange();
+      range.selectNode(table);
+      window.getSelection().addRange(range);
+
+      try {
+        document.execCommand('copy');
+        console.log('Table copied to clipboard!');
+      } catch (err) {
+        console.error('Unable to copy table:', err);
+      }
+
+      window.getSelection().removeAllRanges();
+    });
+  </script>
+</body>
+</html>

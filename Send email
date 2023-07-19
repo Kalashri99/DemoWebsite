@@ -1,0 +1,7 @@
+@{
+    string emailAddress = "recipient@example.com";
+    string subject = "Your email subject";
+    string body = "Your email body";
+}
+
+<a href="mailto:@emailAddress?subject=@subject&body=@body" target="_top">Send Email</a>

@@ -1,0 +1,118 @@
+<div>
+    <table id="itemsTable">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Item Description</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div id="pagination"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        loadItems(1);
+
+        function loadItems(pageNumber) {
+            $.ajax({
+                url: '/api/items',
+                data: {
+                    pageNumber: pageNumber,
+                    pageSize: 10
+                },
+                type: 'GET',
+                success: function (result) {
+                    var items = result.items;
+
+                    // Clear the table body
+                    $('#itemsTable tbody').empty();
+
+                    // Populate the table with the paginated items
+                    for (var i = 0; i < items.length; i++) {
+                        var row = '<tr>' +
+                            '<td>' + items[i].name + '</td>' +
+                            '<td>' + items[i].description + '</td>' +
+                            '</tr>';
+                        $('#itemsTable tbody').append(row);
+                    }
+
+                    // Display pagination controls
+                    var pagination = '<nav>' +
+                        '<ul class="pagination">' +
+                        '<li class="page-item' + (pageNumber === 1 ? ' disabled' : '') + '">' +
+                        '<a class="page-link" href="#" onclick="loadItems(' + (pageNumber - 1) + ')">Previous</a>' +
+                        '</li>';
+
+                    for (var j = 1; j <= result.totalPages; j++) {
+                        pagination += '<li class="page-item' + (j === pageNumber ? ' active' : '') + '">' +
+                            '<a class="page-link" href="#" onclick="loadItems(' + j + ')">' + j + '</a>' +
+                            '</li>';
+                    }
+
+                    pagination += '<li class="page-item' + (pageNumber === result.totalPages ? ' disabled' : '') + '">' +
+                        '<a class="page-link" href="#" onclick="loadItems(' + (pageNumber + 1) + ')">Next</a>' +
+                        '</li>' +
+                        '</ul>' +
+                        '</nav>';
+
+                    $('#pagination').html(pagination);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
+[HttpGet]
+public ActionResult<IEnumerable<Item>> GetItems(int pageNumber = 1, int pageSize = 10)
+{
+    // Fetch the data from your data source
+    var items = _repository.GetItems();
+
+    // Apply pagination
+    var pagedItems = items.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
+    return Ok(pagedItems);
+}
+
+
+[HttpGet]
+public ActionResult<IEnumerable<Item>> GetItems(int pageNumber = 1, int pageSize = 10)
+{
+    // Fetch the data from your data source
+    var items = _repository.GetItems();
+
+    // Apply pagination
+    var pagedItems = items.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+
+    // Get the total count of items
+    var totalCount = items.Count();
+
+    // Calculate total pages
+    var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+    // Prepare the response object with paged items and metadata
+    var response = new
+    {
+        TotalCount = totalCount,
+        TotalPages = totalPages,
+        Items = pagedItems
+    };
+
+    return Ok(response);
+}
+
+services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    });

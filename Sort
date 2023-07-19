@@ -1,0 +1,260 @@
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from the current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+  toggleCaretSymbol(n, dir); // Call function to toggle caret symbol
+}
+
+function toggleCaretSymbol(columnIndex, sortOrder) {
+  var headers = document.getElementsByClassName("sort-header");
+  for (var i = 0; i < headers.length; i++) {
+    headers[i].classList.remove("asc", "desc");
+    headers[i].innerHTML = headers[i].dataset.text;
+  }
+  var header = headers[columnIndex];
+  header.classList.add(sortOrder);
+  header.dataset.text = header.innerHTML;
+  header.innerHTML = header.innerHTML + (sortOrder === "asc" ? " &#9650;" : " &#9660;");
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    .sort-header {
+      cursor: pointer;
+    }
+    .asc::after {
+      content: " \25B2"; /* caret up symbol */
+    }
+    .desc::after {
+      content: " \25BC"; /* caret down symbol */
+    }
+  </style>
+</head>
+<body>
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th class="sort-header" onclick="sortTable(0)" data-text="Name">Name</th>
+        <th class="sort-header" onclick="sortTable(1)" data-text="Age">Age</th>
+        <th class="sort-header" onclick="sortTable(2)" data-text="City">City</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>25</td>
+        <td>New York</td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>30</td>
+        <td>London</td>
+      </tr>
+      <tr>
+        <td>Mark Johnson</td>
+        <td>28</td>
+        <td>Paris</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // JavaScript code here (sortTable function and toggleCaretSymbol function)
+  </script>
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+      cursor: pointer;
+    }
+    .sort-header::after {
+      content: "";
+      position: absolute;
+      right: 0.5rem;
+    }
+    .asc::after {
+      content: " \25B2"; /* caret up symbol */
+    }
+    .desc::after {
+      content: " \25BC"; /* caret down symbol */
+    }
+  </style>
+</head>
+<body>
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th class="sort-header" onclick="sortTable(0)" data-text="Name">Name</th>
+        <th class="sort-header" onclick="sortTable(1)" data-text="Age">Age</th>
+        <th class="sort-header" onclick="sortTable(2)" data-text="City">City</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>25</td>
+        <td>New York</td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>30</td>
+        <td>London</td>
+      </tr>
+      <tr>
+        <td>Mark Johnson</td>
+        <td>28</td>
+        <td>Paris</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // JavaScript code here (sortTable function)
+  </script>
+</body>
+</html>
+
+
+
+
+
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc"; 
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from the current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+  
+  // Clear existing sortable indicators from all columns
+  const headers = table.querySelectorAll("th");
+  headers.forEach(header => {
+    header.innerHTML = header.innerHTML.replace(" ▲", "").replace(" ▼", "");
+  });
+  
+  // Add sortable indicator to the clicked column header
+  const clickedHeader = headers[n];
+  const indicator = dir === "asc" ? " ▲" : " ▼";
+  clickedHeader.innerHTML += indicator;
+}
+
